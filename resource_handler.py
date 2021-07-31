@@ -51,34 +51,37 @@ class ResourceHandler:
         return self.total_program_memory[program.program_id]
 
     def view_resources_table(self):
+        # Amount to justify the titles/other cells
+        justify_amount = 15
         table = "RESOURCE TABLE\n"
-        table += "------------------------------------------------------------------------------------------------\n"
+        # Justify the titles + justify the 5 nodes = 6 * justify amount
+        table += f"{'-'*(justify_amount*6)}\n"
 
-        table += "Node id:\t\t\t"
+        table += "Node id:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
-            table += f"{node.node_id}\t\t"
+            table += f"{node.node_id}".rjust(justify_amount, ' ')
         table += "\n"
-        table += "------------------------------------------------------------------------------------------------\n"
-        table += "Program id:\t\t\t"
+        table += f"{'-'*(justify_amount*6)}\n"
+        table += "Program id:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
             to_put = f"{node.resident_program.program_id}" if node.resident_program else "-"
-            table += f"{to_put}\t\t"
+            table += f"{to_put}".rjust(justify_amount, ' ')
         table += "\n"
-        table += "Prog share no:\t\t"
+        table += "Prog share no:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
             to_put = f"{node.resident_program.program_id}" if node.resident_program else "-"
-            table += f"{to_put}\t\t"
+            table += f"{to_put}".rjust(justify_amount, ' ')
         table += "\n"
-        table += "Memory size:\t\t"
+        table += "Memory size:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
-            table += f"{node.memory_size}\t\t"
+            table += f"{node.memory_size}".rjust(justify_amount, ' ')
         table += "\n"
-        table += "Printer no:\t\t\t"
+        table += "Printer no:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
-            table += f"{node.printers}\t\t"
+            table += f"{node.printers}".rjust(justify_amount, ' ')
         table += "\n"
-        table += "Disk space:\t\t\t"
+        table += "Disk space:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
-            table += f"{node.disk_space}\t\t"
+            table += f"{node.disk_space}".rjust(justify_amount, ' ')
         table += "\n"
         print(table)
