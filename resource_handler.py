@@ -55,13 +55,13 @@ class ResourceHandler:
         justify_amount = 15
         table = "RESOURCE TABLE\n"
         # Justify the titles + justify the 5 nodes = 6 * justify amount
-        table += f"{'-'*(justify_amount*6)}\n"
+        table += f"{'-' * (justify_amount * 6)}\n"
 
         table += "Node id:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
             table += f"{node.node_id}".rjust(justify_amount, ' ')
         table += "\n"
-        table += f"{'-'*(justify_amount*6)}\n"
+        table += f"{'-' * (justify_amount * 6)}\n"
         table += "Program id:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
             to_put = f"{node.resident_program.program_id}" if node.resident_program else "-"

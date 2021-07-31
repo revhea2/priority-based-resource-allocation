@@ -6,6 +6,7 @@ from resource_handler import ResourceHandler
 from dispatcher import Dispatcher
 from objective_function import ObjectiveFunction
 
+
 def initialize_programs(_programs):
     _programs.append(Program(1, "Windows Shell", 1))
     _programs.append(Program(2, "Pycharm", 1.5))
@@ -14,16 +15,20 @@ def initialize_programs(_programs):
 
 def initialize_nodes(_nodes):
     _nodes.append(
-        Node(node_id=1, disk_space=40, memory_size=16, printers=0, resident_program=None, program_shareability=0))
+        Node(node_id=1, disk_space=40, memory_size=16, printers=0, resident_program=None, program_shareability=0,
+             disk_band=5, printer_band=2))
     _nodes.append(
-        Node(node_id=2, disk_space=20, memory_size=4, printers=1, resident_program=programs[2], program_shareability=2))
+        Node(node_id=2, disk_space=20, memory_size=4, printers=1, resident_program=programs[2], program_shareability=2,
+             disk_band=6, printer_band=1))
     _nodes.append(
-        Node(node_id=3, disk_space=4, memory_size=64, printers=0, resident_program=programs[0], program_shareability=3))
+        Node(node_id=3, disk_space=5, memory_size=64, printers=0, resident_program=programs[0], program_shareability=3,
+             disk_band=5, printer_band=2))
     _nodes.append(
         Node(node_id=4, disk_space=10, memory_size=32, printers=1, resident_program=programs[1],
-             program_shareability=4))
+             program_shareability=4, disk_band=4, printer_band=1))
     _nodes.append(
-        Node(node_id=5, disk_space=30, memory_size=8, printers=0, resident_program=programs[0], program_shareability=1))
+        Node(node_id=5, disk_space=30, memory_size=8, printers=0, resident_program=programs[0], program_shareability=1,
+             disk_band=6, printer_band=1))
 
 
 def initialize_apps(_apps):
@@ -41,7 +46,6 @@ def initialize_apps(_apps):
 
 
 if __name__ == '__main__':
-
     # initialize programs
     programs = []
     initialize_programs(programs)
@@ -74,6 +78,3 @@ if __name__ == '__main__':
 
     resource_allocator = ResourceAllocation(pool, resource_table)
     resource_allocator.perform_resource_allocation()
-
-
-
