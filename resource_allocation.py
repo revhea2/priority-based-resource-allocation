@@ -24,7 +24,7 @@ class ResourceAllocation:
         return True
 
     def resource_allocation_algorithm1(self, allocated, allocation_queue, unallocated, node_selector):
-        print("Resource allocation algorithm 1   - - - -  - -  - - - - -  - -  - - - - ")
+        print("Resource allocation algorithm   - - - -  - -  - - - - -  - -  - - - - ")
         newly_allocated = []
         for i in range(len(self.pool)):
             for j in range(len(self.pool[i])):
@@ -70,6 +70,7 @@ class ResourceAllocation:
                                 prg, prg_node = node
                                 self.resource_deallocate(2, prg, prg_node)
                         unallocated[i].append(app)
+
                         continue
                     allocated_resources[3] = node_for_printer
 
@@ -93,7 +94,6 @@ class ResourceAllocation:
                 if has_enough_bandwidth != bandwidth_types:
                     # deallocate
                     self.resource_deallocate(1, app, node_for_disk)
-
                     if nodes_for_programs:
                         for node in nodes_for_programs:
                             prg, prg_node = node
@@ -111,6 +111,7 @@ class ResourceAllocation:
                                 prg, prg_node = node
                                 self.resource_deallocate(2, prg, prg_node)
                         self.resource_deallocate(3, app, node_for_printer)
+
                         unallocated[i].append(app)
                         continue
                     else:

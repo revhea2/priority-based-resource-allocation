@@ -1,6 +1,6 @@
 class Application:
 
-    def __init__(self, app_id, app_name, disk_size, programs=[], printers=0):
+    def __init__(self, app_id, app_name, disk_size, programs, printers):
         self.app_id = app_id
         self.app_name = app_name
         self.disk_size = disk_size

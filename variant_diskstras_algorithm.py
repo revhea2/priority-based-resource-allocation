@@ -75,6 +75,8 @@ class VDA:
 
     def re_allocate_band(self, node_id, band_allocated):
         self.band[node_id] += band_allocated
+        self.graph[node_id][self.pre[node_id]] += band_allocated
+        self.graph[self.pre[node_id]][node_id] += band_allocated
 
     def view_graph(self):
         for arr in self.graph:

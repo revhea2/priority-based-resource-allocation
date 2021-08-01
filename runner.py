@@ -16,36 +16,34 @@ def initialize_programs(_programs):
 def initialize_nodes(_nodes):
     _nodes.append(
         Node(node_id=1, disk_space=40, memory_size=16, printers=0, resident_program=None, program_shareability=0,
-             disk_band=5, printer_band=2))
+             disk_band=8, printer_band=2))
     _nodes.append(
         Node(node_id=2, disk_space=20, memory_size=4, printers=1, resident_program=programs[2], program_shareability=2,
-             disk_band=6, printer_band=1))
+             disk_band=10, printer_band=1))
     _nodes.append(
         Node(node_id=3, disk_space=5, memory_size=64, printers=0, resident_program=programs[0], program_shareability=3,
-             disk_band=5, printer_band=2))
+             disk_band=17, printer_band=2))
     _nodes.append(
         Node(node_id=4, disk_space=10, memory_size=32, printers=1, resident_program=programs[1],
-             program_shareability=4, disk_band=4, printer_band=1))
+             program_shareability=4, disk_band=9, printer_band=1))
     _nodes.append(
         Node(node_id=5, disk_space=30, memory_size=8, printers=0, resident_program=programs[0], program_shareability=1,
-             disk_band=6, printer_band=1))
+             disk_band=12, printer_band=1))
 
 
 def initialize_apps(_apps):
     p1 = programs[0]
-    p1.number = 1
-    p2 = programs[2]
-    p2.number = 1
-    _apps.append(Application(1, "App1", 5, [p1, p2], 1))
+    p2 = programs[1]
+    p3 = programs[2]
 
-    p1 = programs[1]
-    p1.number = 1
+    _apps.append(Application(1, "App1", 5, [p1, p3], 1))
+    _apps.append(Application(2, "App2", 5, [p1, p2], 1))
+    _apps.append(Application(3, "App3", 5, [p2, p3], 1))
+    _apps.append(Application(4, "App4", 5, [], 1))
+    _apps.append(Application(5, "App5", 5, [p3], 1))
+    _apps.append(Application(6, "App6", 5, [p2], 1))
 
-    _apps.append(Application(2, "App2", 8, [p1], 1))
-    _apps.append(Application(3, "App3", 2, printers=1))
-    _apps.append(Application(4, "App4", 10, printers=1))
-    _apps.append(Application(5, "App5", 10, printers=1))
-    _apps.append(Application(6, "App6", 10, printers=1))
+
 
 
 if __name__ == '__main__':
