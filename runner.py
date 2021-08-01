@@ -43,6 +43,9 @@ def initialize_apps(_apps):
 
     _apps.append(Application(2, "App2", 8, [p1], 1))
     _apps.append(Application(3, "App3", 2, printers=1))
+    _apps.append(Application(4, "App4", 10, printers=1))
+    _apps.append(Application(5, "App5", 10, printers=1))
+    _apps.append(Application(6, "App6", 10, printers=1))
 
 
 if __name__ == '__main__':
@@ -77,4 +80,6 @@ if __name__ == '__main__':
     unalloc = [[] for _ in range(len(pool))]
 
     resource_allocator = ResourceAllocation(pool, resource_table)
-    resource_allocator.perform_resource_allocation()
+    allocation_queue = resource_allocator.perform_resource_allocation()
+
+    print(allocation_queue)

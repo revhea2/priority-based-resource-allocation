@@ -48,7 +48,10 @@ class VDA:
 
             i += 1
 
+        # set global vlaues
         self.band = band
+        self.pre = pre
+
         paths = [[] for _ in range(v)]
         for j in range(1, v):
             paths[j].append(j)
@@ -67,6 +70,8 @@ class VDA:
 
     def allocate_band(self, node_id, band_allocated):
         self.band[node_id] -= band_allocated
+        self.graph[node_id][self.pre[node_id]] -= band_allocated
+        self.graph[self.pre[node_id]][node_id] -= band_allocated
 
     def re_allocate_band(self, node_id, band_allocated):
         self.band[node_id] += band_allocated
