@@ -37,11 +37,11 @@ def initialize_apps(_apps):
     p3 = programs[2]
 
     _apps.append(Application(1, "App1", 5, [p1, p3], 1))
-    _apps.append(Application(2, "App2", 5, [p1, p2], 1))
-    _apps.append(Application(3, "App3", 5, [p2, p3], 1))
-    _apps.append(Application(4, "App4", 5, [], 1))
-    _apps.append(Application(5, "App5", 5, [p3], 1))
-    _apps.append(Application(6, "App6", 5, [p2], 1))
+    _apps.append(Application(2, "App2", 25, [p1, p2], 1))
+    _apps.append(Application(3, "App3", 13, [p2, p3], 0))
+    _apps.append(Application(4, "App4", 24, [], 1))
+    _apps.append(Application(5, "App5", 14, [], 0))
+    _apps.append(Application(6, "App6", 30, [p2,p3], 1))
 
 
 
