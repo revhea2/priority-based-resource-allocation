@@ -149,6 +149,7 @@ class ResourceAllocation:
                 # prints details
                 print(app, "is allocated!")
                 self.resources.view_resources_table()
+                self.vda.view_graph()
 
         allocation_queue.extend(newly_allocated)
 

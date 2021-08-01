@@ -52,6 +52,10 @@ class VDA:
         self.band = band
         self.pre = pre
 
+        print("PRE List")
+        print(pre)
+        print("<--------------->")
+
         paths = [[] for _ in range(v)]
         for j in range(1, v):
             paths[j].append(j)
