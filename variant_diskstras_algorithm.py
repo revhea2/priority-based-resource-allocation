@@ -6,8 +6,8 @@ class VDA:
             [0, 0, 0, 6, 0, 10],
             [13, 0, 0, 16, 0, 11],
             [0, 6, 16, 0, 5, 17],
-            [16, 0, 0, 5, 0, 0],
-            [8, 10, 11, 17, 0, 0],
+            [16, 0, 0, 5, 0, 7],
+            [8, 10, 11, 17, 7, 0],
         ]
         self.band = None
         self.pre = None
@@ -77,10 +77,10 @@ class VDA:
         self.graph[node_id][self.pre[node_id]] -= band_allocated
         self.graph[self.pre[node_id]][node_id] -= band_allocated
 
-    def re_allocate_band(self, node_id, band_allocated):
+    def re_allocate_band(self, node_id, pre, band_allocated):
         self.band[node_id] += band_allocated
-        self.graph[node_id][self.pre[node_id]] += band_allocated
-        self.graph[self.pre[node_id]][node_id] += band_allocated
+        self.graph[node_id][pre] += band_allocated
+        self.graph[pre][node_id] += band_allocated
 
     def view_graph(self):
         for arr in self.graph:

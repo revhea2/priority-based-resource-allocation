@@ -44,8 +44,6 @@ def initialize_apps(_apps):
     _apps.append(Application(6, "App6", 30, [p2,p3], 1))
 
 
-
-
 if __name__ == '__main__':
     # initialize programs
     programs = []

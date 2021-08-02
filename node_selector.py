@@ -27,7 +27,6 @@ class NodeSelector:
             for program in request:
                 max_size = 0
                 max_node = None
-                # todo: program number should be taken to account
                 for node_id, node in self.resources.nodes.items():
                     if node.resident_program and program == node.resident_program:
                         if program.memory_size == node.memory_size:

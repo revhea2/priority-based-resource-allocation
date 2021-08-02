@@ -14,6 +14,7 @@ class ResourceAllocation:
             self.resources.nodes[selected_node.node_id].disk_space += allocated_node.disk_size
         elif resource_type == 2:
             self.resources.nodes[selected_node.node_id].memory_size += allocated_node.memory_size
+            self.resources.nodes[selected_node.node_id].program_shareability += 1
         else:
             self.resources.nodes[selected_node.node_id].printers += allocated_node.printers
 
@@ -29,6 +30,7 @@ class ResourceAllocation:
         for i in range(len(self.pool)):
             for j in range(len(self.pool[i])):
                 app = self.pool[i][j]
+                print(app)
                 node_for_disk = None
                 nodes_for_programs = None
                 node_for_printer = None
@@ -103,7 +105,9 @@ class ResourceAllocation:
                     continue
 
                 if node_for_disk:
+
                     if self.vda.check_bandwidth(node_for_disk.node_id) < node_for_disk.disk_band * 0.5:
+
                         # dealocate
                         self.resource_deallocate(1, app, node_for_disk)
                         if nodes_for_programs:
@@ -115,10 +119,11 @@ class ResourceAllocation:
                         unallocated[i].append(app)
                         continue
                     else:
+
                         available = self.vda.check_bandwidth(node_for_disk.node_id)
                         allocated_band = available if available < node_for_disk.disk_band else node_for_disk.disk_band
                         self.vda.allocate_band(node_for_disk.node_id, allocated_band)
-                        allocated_bandwidths[1] = [node_for_disk, allocated_band]
+                        allocated_bandwidths[1] = [node_for_disk, self.vda.pre[node_for_disk.node_id], allocated_band]
 
                 # for printer bandwidth
                 if node_for_printer:
@@ -137,7 +142,8 @@ class ResourceAllocation:
                         available = self.vda.check_bandwidth(node_for_printer.node_id)
                         allocated_band = available if available < node_for_printer.printer_band else node_for_printer.printer_band
                         self.vda.allocate_band(node_for_printer.node_id, allocated_band)
-                        allocated_bandwidths[2] = [node_for_printer, allocated_band]
+                        allocated_bandwidths[2] = [node_for_printer, self.vda.pre[node_for_printer.node_id],
+                                                   allocated_band]
 
                 # # views allocated bands
                 # print("allocated bands")
@@ -185,9 +191,11 @@ class ResourceAllocation:
 
                 if bandwidth_allocations:
                     if 1 in bandwidth_allocations:
-                        self.vda.re_allocate_band(bandwidth_allocations[1][0].node_id, bandwidth_allocations[1][1])
+                        self.vda.re_allocate_band(bandwidth_allocations[1][0].node_id, bandwidth_allocations[1][1],
+                                                  bandwidth_allocations[1][2])
                     if 2 in bandwidth_allocations:
-                        self.vda.re_allocate_band(bandwidth_allocations[2][0].node_id, bandwidth_allocations[2][1])
+                        self.vda.re_allocate_band(bandwidth_allocations[2][0].node_id, bandwidth_allocations[2][1],
+                                                  bandwidth_allocations[2][2])
             self.resource_allocation_algorithm2(allocated, allocation_queue, unallocated, node_selector)
 
     def has_no_apps_in_pool(self):

@@ -69,7 +69,7 @@ class ResourceHandler:
         table += "\n"
         table += "Prog share no:".ljust(justify_amount, ' ')
         for node in self.nodes_list:
-            to_put = f"{node.resident_program.program_id}" if node.resident_program else "-"
+            to_put = f"{node.program_shareability}" if node.resident_program else "-"
             table += f"{to_put}".rjust(justify_amount, ' ')
         table += "\n"
         table += "Memory size:".ljust(justify_amount, ' ')
