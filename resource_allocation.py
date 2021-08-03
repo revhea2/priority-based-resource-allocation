@@ -25,12 +25,11 @@ class ResourceAllocation:
         return True
 
     def resource_allocation_algorithm1(self, allocated, allocation_queue, unallocated, node_selector):
-        print("Resource allocation algorithm   - - - -  - -  - - - - -  - -  - - - - ")
+        # print("Resource allocation algorithm   - - - -  - -  - - - - -  - -  - - - - ")
         newly_allocated = []
         for i in range(len(self.pool)):
             for j in range(len(self.pool[i])):
                 app = self.pool[i][j]
-                print(app)
                 node_for_disk = None
                 nodes_for_programs = None
                 node_for_printer = None
@@ -156,14 +155,14 @@ class ResourceAllocation:
                 newly_allocated.append([app])
 
                 # prints details
-                print(app, "is allocated!")
-                self.resources.view_resources_table()
-                self.vda.view_graph()
+                # print(app, "is allocated!")
+                # self.resources.view_resources_table()
+                # self.vda.view_graph()
 
         allocation_queue.extend(newly_allocated)
 
     def perform_resource_allocation(self):
-        print("Currently in Resource Allocation:")
+        # print("Currently in Resource Allocation:")
         node_selector = NodeSelector(self.resources)
 
         unallocated = [[] for _ in range(len(self.pool))]
@@ -177,13 +176,11 @@ class ResourceAllocation:
     def resource_allocation_algorithm2(self, allocated, allocation_queue, unallocated, node_selector):
 
         self.resource_allocation_algorithm1(allocated, allocation_queue, unallocated, node_selector)
+
         self.pool = unallocated
-        unallocated = [[] for _ in range(len(self.pool))]
 
-        print("Allocated: ")
-        print(allocated)
-
-        if not self.has_no_apps_in_pool():
+        while not self.has_no_apps_in_pool():
+            unallocated = [[] for _ in range(len(self.pool))]
             if allocated:
                 app, bandwidth_allocations, resource_allocations = allocated.pop(0)
                 if 1 in resource_allocations:
@@ -202,7 +199,8 @@ class ResourceAllocation:
                     if 2 in bandwidth_allocations:
                         self.vda.re_allocate_band(bandwidth_allocations[2][0].node_id, bandwidth_allocations[2][1],
                                                   bandwidth_allocations[2][2])
-            self.resource_allocation_algorithm2(allocated, allocation_queue, unallocated, node_selector)
+            self.resource_allocation_algorithm1(allocated, allocation_queue, unallocated, node_selector)
+            self.pool = unallocated
 
     def has_no_apps_in_pool(self):
         for apps in self.pool:

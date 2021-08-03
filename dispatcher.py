@@ -62,17 +62,17 @@ class Dispatcher:
 
     @staticmethod
     def sort_resource_type_priority(resource_type_priority):
-        print("Currently in Dispatcher:")
-        print("Resource Type Priority: (Unsorted)")
-        for resource_type in resource_type_priority:
-            print(resource_type)
+        # print("Currently in Dispatcher:")
+        # print("Resource Type Priority: (Unsorted)")
+        # for resource_type in resource_type_priority:
+        #     print(resource_type)
 
         resource_type_priority.sort(key=lambda res_type: -res_type[1])
 
-        print()
-        print("Resource Type Priority: (Sorted) ")
-        for resource_type in resource_type_priority:
-            print(resource_type)
+        # print()
+        # print("Resource Type Priority: (Sorted) ")
+        # for resource_type in resource_type_priority:
+        #     print(resource_type)
 
     def dispatch(self, apps, programs, m, resources):
         resource_type_priority = [0] * m
@@ -89,15 +89,15 @@ class Dispatcher:
         self.sort_resource_type_priority(resource_type_priority)
         self.pool_dispatching(pool, resource_type_priority, apps)
 
-        print("\n- - - - - - - - - - - - - - - - - -\nThe applications are now dispatched! \n")
-        print("Pool with priority:")
-        for index, _pool in enumerate(pool):
-            print(f"Pool {index}: ", end="")
-            for app in _pool:
-                print(f"{app};", end=" ")
-            print()
-
-        print("------------------------------------- End of Dispatcher's job ---------------------------------------")
-        print()
+        # print("\n- - - - - - - - - - - - - - - - - -\nThe applications are now dispatched! \n")
+        # print("Pool with priority:")
+        # for index, _pool in enumerate(pool):
+        #     print(f"Pool {index}: ", end="")
+        #     for app in _pool:
+        #         print(f"{app};", end=" ")
+        #     print()
+        #
+        # print("------------------------------------- End of Dispatcher's job ---------------------------------------")
+        # print()
 
         return pool

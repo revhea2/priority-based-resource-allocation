@@ -6,7 +6,7 @@ from resource_handler import ResourceHandler
 from dispatcher import Dispatcher
 from objective_function import ObjectiveFunction
 import random
-
+import timeit
 
 def initialize_programs(_programs):
     _programs.append(Program(1, "Windows Shell", 1))
@@ -42,8 +42,7 @@ def random_app_initialization(_apps, n):
 
         _apps.append(Application(i + 1, f"App{i + 1}", random.randint(5, 30), prg, random.randint(0, 1)))
 
-    for a in _apps:
-        print(a, a.disk_size, a.programs, a.printers)
+
 
 
 def initialize_apps(_apps):
@@ -70,13 +69,14 @@ if __name__ == '__main__':
 
     # initialize resource handler/table
     resource_table = ResourceHandler(programs, nodes)
-    resource_table.view_resources_table()
+    # resource_table.view_resources_table()
 
     # initialize apps
     apps = []
-    random_app_initialization(apps, 500)
+    random_app_initialization(apps, 1500)
     # initialize_apps(apps)
 
+    start = timeit.default_timer()
     # initialize dispatcher
     dispatcher = Dispatcher()
     # initialize  objective function
@@ -94,4 +94,7 @@ if __name__ == '__main__':
     resource_allocator = ResourceAllocation(pool, resource_table)
     allocation_queue = resource_allocator.perform_resource_allocation()
 
-    print(allocation_queue)
+    end = timeit.default_timer()
+    print(end-start)
+
+    # print(allocation_queue)

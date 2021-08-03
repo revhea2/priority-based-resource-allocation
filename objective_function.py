@@ -18,20 +18,20 @@ class ObjectiveFunction:
         # for printers
         z += app.printers / self.resources.get_total_printers()
 
-        print(f"Application id: {app.app_id} cost: {z}")
+        # print(f"Application id: {app.app_id} cost: {z}")
         return z
 
     def objective_function(self, pool):
-        print("Currently in Objective Function: ")
+        # print("Currently in Objective Function: ")
         for apps in pool:
             apps.sort(key=lambda x: self.calculate_cost(x))
-        print("\n")
-        print("Applications inside the pool are sorted:")
-        for index, _pool in enumerate(pool):
-            print(f"Pool {index}: ", end="")
-            for app in _pool:
-                print(f"{app};", end=" ")
-            print()
-
-        print("--------------------------------- End of Objective Function's job ---------------------------------")
-        print()
+        # print("\n")
+        # print("Applications inside the pool are sorted:")
+        # for index, _pool in enumerate(pool):
+        #     print(f"Pool {index}: ", end="")
+        #     for app in _pool:
+        #         print(f"{app};", end=" ")
+        #     print()
+        #
+        # print("--------------------------------- End of Objective Function's job ---------------------------------")
+        # print()
