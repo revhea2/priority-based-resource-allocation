@@ -100,7 +100,8 @@ class ResourceAllocation:
                         for node in nodes_for_programs:
                             prg, prg_node = node
                             self.resource_deallocate(2, prg, prg_node)
-                    self.resource_deallocate(3, app, node_for_printer)
+                    if node_for_printer:
+                        self.resource_deallocate(3, app, node_for_printer)
                     unallocated[i].append(app)
                     continue
 
@@ -114,7 +115,8 @@ class ResourceAllocation:
                             for node in nodes_for_programs:
                                 prg, prg_node = node
                                 self.resource_deallocate(2, prg, prg_node)
-                        self.resource_deallocate(3, app, node_for_printer)
+                        if node_for_printer:
+                            self.resource_deallocate(3, app, node_for_printer)
 
                         unallocated[i].append(app)
                         continue
@@ -135,7 +137,8 @@ class ResourceAllocation:
                             for node in nodes_for_programs:
                                 prg, prg_node = node
                                 self.resource_deallocate(2, prg, prg_node)
-                        self.resource_deallocate(1, app, node_for_printer)
+                        if node_for_printer:
+                            self.resource_deallocate(1, app, node_for_printer)
                         unallocated[i].append(app)
                         continue
                     else:
@@ -176,6 +179,9 @@ class ResourceAllocation:
         self.resource_allocation_algorithm1(allocated, allocation_queue, unallocated, node_selector)
         self.pool = unallocated
         unallocated = [[] for _ in range(len(self.pool))]
+
+        print("Allocated: ")
+        print(allocated)
 
         if not self.has_no_apps_in_pool():
             if allocated:

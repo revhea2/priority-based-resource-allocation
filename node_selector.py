@@ -38,7 +38,7 @@ class NodeSelector:
                             max_size = node.memory_size
                             max_node = node
 
-                if max_size > 0:
+                if max_size > 0 and max_node.program_shareability > 0:
                     max_node.program_shareability -= 1
                     max_node.memory_size -= program.memory_size
                     selected_nodes.append([program, max_node])

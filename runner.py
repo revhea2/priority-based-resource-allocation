@@ -5,6 +5,7 @@ from resource_allocation import ResourceAllocation
 from resource_handler import ResourceHandler
 from dispatcher import Dispatcher
 from objective_function import ObjectiveFunction
+import random
 
 
 def initialize_programs(_programs):
@@ -31,6 +32,20 @@ def initialize_nodes(_nodes):
              disk_band=12, printer_band=1))
 
 
+def random_app_initialization(_apps, n):
+    for i in range(n):
+        p_size = random.randint(0, 3)
+        prg = []
+
+        for a in range(p_size):
+            prg.append(programs[a])
+
+        _apps.append(Application(i + 1, f"App{i + 1}", random.randint(5, 30), prg, random.randint(0, 1)))
+
+    for a in _apps:
+        print(a, a.disk_size, a.programs, a.printers)
+
+
 def initialize_apps(_apps):
     p1 = programs[0]
     p2 = programs[1]
@@ -41,7 +56,7 @@ def initialize_apps(_apps):
     _apps.append(Application(3, "App3", 13, [p2, p3], 0))
     _apps.append(Application(4, "App4", 24, [], 1))
     _apps.append(Application(5, "App5", 14, [], 0))
-    _apps.append(Application(6, "App6", 30, [p2,p3], 1))
+    _apps.append(Application(6, "App6", 30, [p2, p3], 1))
 
 
 if __name__ == '__main__':
@@ -59,7 +74,8 @@ if __name__ == '__main__':
 
     # initialize apps
     apps = []
-    initialize_apps(apps)
+    random_app_initialization(apps, 500)
+    # initialize_apps(apps)
 
     # initialize dispatcher
     dispatcher = Dispatcher()
