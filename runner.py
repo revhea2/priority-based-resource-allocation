@@ -125,9 +125,6 @@ if __name__ == '__main__':
     # perform objective function
     of.objective_function(pool)
 
-    # pool complement
-    unalloc = [[] for _ in range(len(pool))]
-
     resource_allocator = ResourceAllocation(pool, resource_table)
     allocation_queue = resource_allocator.perform_resource_allocation()
 

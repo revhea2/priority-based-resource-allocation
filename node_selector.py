@@ -55,7 +55,3 @@ class NodeSelector:
                     return node
             return None
 
-
-
-    def release(self):
-        pass
