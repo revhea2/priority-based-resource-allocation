@@ -75,77 +75,77 @@ class ResourceAllocation:
                         continue
                     allocated_resources[3] = node_for_printer
 
-                paths = self.vda.variant_dijkstra_algorithm(0, len(self.resources.nodes) + 1)
-                has_enough_bandwidth = 0
-
-                if node_for_disk and node_for_printer:
-                    bandwidth_types = 2
-                elif node_for_disk or node_for_printer:
-                    bandwidth_types = 1
-                else:
-                    bandwidth_types = 0
-
-                # check disk_size_path
-                if node_for_disk and self.check_path(paths[node_for_disk.node_id]):
-                    has_enough_bandwidth += 1
-
-                if node_for_printer and self.check_path(paths[node_for_printer.node_id]):
-                    has_enough_bandwidth += 1
-
-                if has_enough_bandwidth != bandwidth_types:
-                    # deallocate
-                    self.resource_deallocate(1, app, node_for_disk)
-                    if nodes_for_programs:
-                        for node in nodes_for_programs:
-                            prg, prg_node = node
-                            self.resource_deallocate(2, prg, prg_node)
-                    if node_for_printer:
-                        self.resource_deallocate(3, app, node_for_printer)
-                    unallocated[i].append(app)
-                    continue
-
-                if node_for_disk:
-
-                    if self.vda.check_bandwidth(node_for_disk.node_id) < node_for_disk.disk_band * 0.5:
-
-                        # dealocate
-                        self.resource_deallocate(1, app, node_for_disk)
-                        if nodes_for_programs:
-                            for node in nodes_for_programs:
-                                prg, prg_node = node
-                                self.resource_deallocate(2, prg, prg_node)
-                        if node_for_printer:
-                            self.resource_deallocate(3, app, node_for_printer)
-
-                        unallocated[i].append(app)
-                        continue
-                    else:
-
-                        available = self.vda.check_bandwidth(node_for_disk.node_id)
-                        allocated_band = available if available < node_for_disk.disk_band else node_for_disk.disk_band
-                        self.vda.allocate_band(node_for_disk.node_id, allocated_band)
-                        allocated_bandwidths[1] = [node_for_disk, self.vda.pre[node_for_disk.node_id], allocated_band]
-
-                # for printer bandwidth
-                if node_for_printer:
-                    if self.vda.check_bandwidth(
-                            node_for_printer.node_id) < node_for_printer.printer_band * 0.5:
-                        # deallocate
-                        self.resource_deallocate(1, app, node_for_disk)
-                        if nodes_for_programs:
-                            for node in nodes_for_programs:
-                                prg, prg_node = node
-                                self.resource_deallocate(2, prg, prg_node)
-                        if node_for_printer:
-                            self.resource_deallocate(1, app, node_for_printer)
-                        unallocated[i].append(app)
-                        continue
-                    else:
-                        available = self.vda.check_bandwidth(node_for_printer.node_id)
-                        allocated_band = available if available < node_for_printer.printer_band else node_for_printer.printer_band
-                        self.vda.allocate_band(node_for_printer.node_id, allocated_band)
-                        allocated_bandwidths[2] = [node_for_printer, self.vda.pre[node_for_printer.node_id],
-                                                   allocated_band]
+                # paths = self.vda.variant_dijkstra_algorithm(0, len(self.resources.nodes) + 1)
+                # has_enough_bandwidth = 0
+                #
+                # if node_for_disk and node_for_printer:
+                #     bandwidth_types = 2
+                # elif node_for_disk or node_for_printer:
+                #     bandwidth_types = 1
+                # else:
+                #     bandwidth_types = 0
+                #
+                # # check disk_size_path
+                # if node_for_disk and self.check_path(paths[node_for_disk.node_id]):
+                #     has_enough_bandwidth += 1
+                #
+                # if node_for_printer and self.check_path(paths[node_for_printer.node_id]):
+                #     has_enough_bandwidth += 1
+                #
+                # if has_enough_bandwidth != bandwidth_types:
+                #     # deallocate
+                #     self.resource_deallocate(1, app, node_for_disk)
+                #     if nodes_for_programs:
+                #         for node in nodes_for_programs:
+                #             prg, prg_node = node
+                #             self.resource_deallocate(2, prg, prg_node)
+                #     if node_for_printer:
+                #         self.resource_deallocate(3, app, node_for_printer)
+                #     unallocated[i].append(app)
+                #     continue
+                #
+                # if node_for_disk:
+                #
+                #     if self.vda.check_bandwidth(node_for_disk.node_id) < node_for_disk.disk_band * 0.5:
+                #
+                #         # dealocate
+                #         self.resource_deallocate(1, app, node_for_disk)
+                #         if nodes_for_programs:
+                #             for node in nodes_for_programs:
+                #                 prg, prg_node = node
+                #                 self.resource_deallocate(2, prg, prg_node)
+                #         if node_for_printer:
+                #             self.resource_deallocate(3, app, node_for_printer)
+                #
+                #         unallocated[i].append(app)
+                #         continue
+                #     else:
+                #
+                #         available = self.vda.check_bandwidth(node_for_disk.node_id)
+                #         allocated_band = available if available < node_for_disk.disk_band else node_for_disk.disk_band
+                #         self.vda.allocate_band(node_for_disk.node_id, allocated_band)
+                #         allocated_bandwidths[1] = [node_for_disk, self.vda.pre[node_for_disk.node_id], allocated_band]
+                #
+                # # for printer bandwidth
+                # if node_for_printer:
+                #     if self.vda.check_bandwidth(
+                #             node_for_printer.node_id) < node_for_printer.printer_band * 0.5:
+                #         # deallocate
+                #         self.resource_deallocate(1, app, node_for_disk)
+                #         if nodes_for_programs:
+                #             for node in nodes_for_programs:
+                #                 prg, prg_node = node
+                #                 self.resource_deallocate(2, prg, prg_node)
+                #         if node_for_printer:
+                #             self.resource_deallocate(1, app, node_for_printer)
+                #         unallocated[i].append(app)
+                #         continue
+                #     else:
+                #         available = self.vda.check_bandwidth(node_for_printer.node_id)
+                #         allocated_band = available if available < node_for_printer.printer_band else node_for_printer.printer_band
+                #         self.vda.allocate_band(node_for_printer.node_id, allocated_band)
+                #         allocated_bandwidths[2] = [node_for_printer, self.vda.pre[node_for_printer.node_id],
+                #                                    allocated_band]
 
                 # # views allocated bands
                 # print("allocated bands")

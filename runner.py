@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
     # initialize apps
     apps = []
-    random_app_initialization(apps, 1500)
+    random_app_initialization(apps, 1000)
     # initialize_apps(apps)
 
     start = timeit.default_timer()
