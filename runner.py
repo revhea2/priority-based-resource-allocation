@@ -46,6 +46,36 @@ def random_app_initialization(_apps, n):
         print(a, a.disk_size, a.programs, a.printers)
 
 
+def view_apps(_apps):
+    # Amount to justify the titles/other cells
+    justify_amount = 15
+    table = "Application TABLE\n"
+    # Justify the titles + justify the 5 nodes = 6 * justify amount
+    table += f"{'-' * (justify_amount * 7)}\n"
+
+    table += "App id:".ljust(justify_amount, ' ')
+    for app in _apps:
+        table += f"{app.app_id}".rjust(justify_amount, ' ')
+    table += "\n"
+    table += f"{'-' * (justify_amount * 7)}\n"
+    table += "Hard disk:".ljust(justify_amount, ' ')
+    for app in _apps:
+        table += f"{app.disk_size}".rjust(justify_amount, ' ')
+    table += "\n"
+    table += "Programs:".ljust(justify_amount, ' ')
+    for app in _apps:
+        program_list = [p.program_id for p in app.programs]
+        table += f"{program_list}".rjust(justify_amount, ' ')
+    table += "\n"
+    table += "Printer:".ljust(justify_amount, ' ')
+    for app in _apps:
+        table += f"{app.printers}".rjust(justify_amount, ' ')
+    table += "\n"
+
+    print(table)
+    print()
+
+
 def initialize_apps(_apps):
     p1 = programs[0]
     p2 = programs[1]
@@ -57,6 +87,8 @@ def initialize_apps(_apps):
     _apps.append(Application(4, "App4", 24, [], 1))
     _apps.append(Application(5, "App5", 14, [], 0))
     _apps.append(Application(6, "App6", 30, [p2, p3], 1))
+
+    view_apps(_apps)
 
 
 if __name__ == '__main__':
@@ -74,8 +106,13 @@ if __name__ == '__main__':
 
     # initialize apps
     apps = []
-    random_app_initialization(apps, 500)
-    # initialize_apps(apps)
+
+    is_analysis = False
+
+    if is_analysis:
+        random_app_initialization(apps, 500)
+    else:
+        initialize_apps(apps)
 
     # initialize dispatcher
     dispatcher = Dispatcher()

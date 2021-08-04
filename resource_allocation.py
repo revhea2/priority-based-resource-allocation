@@ -35,6 +35,10 @@ class ResourceAllocation:
                 nodes_for_programs = None
                 node_for_printer = None
 
+                print("Before VDA: ")
+                self.vda.view_graph()
+
+
                 allocated_bandwidths = {}
                 allocated_resources = {}
 
@@ -76,6 +80,7 @@ class ResourceAllocation:
                         continue
                     allocated_resources[3] = node_for_printer
 
+
                 paths = self.vda.variant_dijkstra_algorithm(0, len(self.resources.nodes) + 1)
                 has_enough_bandwidth = 0
 
@@ -109,7 +114,7 @@ class ResourceAllocation:
 
                     if self.vda.check_bandwidth(node_for_disk.node_id) < node_for_disk.disk_band * 0.5:
 
-                        # dealocate
+                        # deallocate
                         self.resource_deallocate(1, app, node_for_disk)
                         if nodes_for_programs:
                             for node in nodes_for_programs:
@@ -159,6 +164,7 @@ class ResourceAllocation:
                 print(app, "is allocated!")
                 self.resources.view_resources_table()
                 self.vda.view_graph()
+                print("\n = = = = = = = = = = = = = = = = = = = = = = ")
 
         allocation_queue.extend(newly_allocated)
 
@@ -180,8 +186,6 @@ class ResourceAllocation:
         self.pool = unallocated
         unallocated = [[] for _ in range(len(self.pool))]
 
-        print("Allocated: ")
-        print(allocated)
 
         if not self.has_no_apps_in_pool():
             if allocated:

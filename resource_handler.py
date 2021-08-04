@@ -84,4 +84,12 @@ class ResourceHandler:
         for node in self.nodes_list:
             table += f"{node.disk_space}".rjust(justify_amount, ' ')
         table += "\n"
+        table += "Disk Band:".ljust(justify_amount, ' ')
+        for node in self.nodes_list:
+            table += f"{node.disk_band}".rjust(justify_amount, ' ')
+        table += "\n"
+        table += "Printer Band:".ljust(justify_amount, ' ')
+        for node in self.nodes_list:
+            table += f"{node.printer_band}".rjust(justify_amount, ' ')
+        table += "\n"
         print(table)

@@ -83,8 +83,10 @@ class VDA:
         self.graph[pre][node_id] += band_allocated
 
     def view_graph(self):
+        print("Graph Adjacency Matrix:")
         for arr in self.graph:
             print(arr)
+        print()
 
 
 if __name__ == '__main__':
